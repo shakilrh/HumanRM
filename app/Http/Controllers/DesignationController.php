@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Designation;
+use App\Branch;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\DataTables\DesignationDataTable;
@@ -27,8 +28,10 @@ class DesignationController extends Controller
      */
     public function create()
     {
-        $departments = Department::select('id', 'name')->active()->get();
-        return view('designation.form', compact('departments'));
+        $data['departments'] = Department::select('id', 'name')->active()->get();
+        $data['branches'] = Branch::active()->select('id', 'name')->get();
+        
+        return view('designation.form', $data);
     }
 
     /**

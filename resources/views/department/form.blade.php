@@ -36,6 +36,7 @@
                         <!-- form start -->
                         <department-form
                             :users="{{ json_encode($users) }}"
+                            :branches="{{ json_encode($branches) }}"
                             :current-dept-head="{{ isset($department->user) ? json_encode($department->user) : json_encode(null) }}"
                             :department="{{ isset($department) ? json_encode($department->toArray()) : json_encode(null)}}"
                             :action="{{ isset($department) ? json_encode(route('departments.update',$department->id)) : json_encode(route('departments.store')) }}"

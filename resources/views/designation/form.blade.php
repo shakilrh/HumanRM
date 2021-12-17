@@ -36,11 +36,17 @@
                         <!-- form start -->
                         <designation-form
                             :departments="{{ json_encode($departments->toArray()) }}"
+                            :branches="{{ json_encode($branches) }}"
                             :current-department="{{ isset($designation->department) ? json_encode($designation->department) : json_encode(null) }}"
                             :designation="{{ isset($designation) ? json_encode($designation->toArray()) : json_encode(null)}}"
                             :action="{{ isset($designation) ? json_encode(route('designations.update',$designation->id)) : json_encode(route('designations.store')) }}"
                             :back-url="{{ json_encode(route('designations.index')) }}">
                         </designation-form>
+
+               
+
+</form>
+                        
                     </div>
                     <!-- /.card -->
                 </div>
@@ -52,5 +58,18 @@
 @endsection
 
 @push('js')
+<script>
+    $('#branchsid').change(function (e) {
+  let id = $('#branchs').val();
+  alert("<select name='state'>");
+  getDesignation(id);
+});
+
+
+function getDesignation(id) {
+  $('#departmentid').append("ayaz");
+  
+}
+</script>
 
 @endpush

@@ -174,7 +174,7 @@
                                         <div class="form-group">
                                             <label for="department">Select Department</label>
                                             <span class="required-field">*</span>
-                                            <select id="department" class="form-control {{ $errors->has('department') ? ' is-invalid' : '' }}" name="department" data-placeholder="Choose Department">
+                                            <select id="department" class="form-control select2 {{ $errors->has('department') ? ' is-invalid' : '' }}" name="department" data-placeholder="Choose Department">
                                                 <option></option>
                                                 @foreach($departments as $key=>$department)
                                                     <option
@@ -196,7 +196,7 @@
                                         <div class="form-group">
                                             <label for="designation">Select Designation</label>
                                             <span class="required-field">*</span>
-                                            <select id="designation" class="form-control {{ $errors->has('designation') ? ' is-invalid' : '' }}" name="designation" data-placeholder="Designation" data-readonly="Choose Department First">
+                                            <select id="designation" class="form-control select2 {{ $errors->has('designation') ? ' is-invalid' : '' }}" name="designation" data-placeholder="Designation" data-readonly="Choose Department First">
                                                 <option></option>
                                                 {{-- @foreach($departments as $key=>$department)
                                                      <option
@@ -422,4 +422,6 @@
                 });
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+    
 @endpush

@@ -8,12 +8,11 @@
                     <input v-model="form.name" type="text" name="name" id="name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="Enter name"   autofocus>
                     <has-error :form="form" field="name"></has-error>
                 </div>
-
-                <div class="form-group">
-                    <label class="typo__label">Head Of Department</label>
-                    <multiselect v-model="head_of_department_value" :options="users" @select="setHeadOfDeptValue"  placeholder="Select Head Of Department" label="name" track-by="id" name="head_of_department" :class="{ 'multiselect-is-invalid': form.errors.has('head_of_department') }"></multiselect>
+               <div class="form-group">
+                    <label class="typo__label">Branches</label>
+                    <multiselect v-model="form.branch" :options="branches" @select="setbranchvalue" id="branchs"  placeholder="Select Branch" label="name" track-by="id" name="branchs" :class="{ 'multiselect-is-invalid': form.errors.has('branchs') }"></multiselect>
                     <div class="multiselect-invalid">
-                        <has-error :form="form" field="head_of_department"></has-error>
+                        <has-error :form="form" field="Branches list"></has-error>
                     </div>
                 </div>
 
@@ -41,7 +40,7 @@
 
 <script>
     export default {
-        props:['users','currentDeptHead','department','action','url'],
+        props:['users','branches','currentDeptHead','department','action','url'],
         data () {
             return {
                 editMode: false,
@@ -49,9 +48,14 @@
                     id: '',
                     name: ''
                 },
+                 branch_value:{
+                    id: '',
+                    name: ''
+                },
                 form: new Form({
                     head_of_department: '',
                     name: '',
+                    branchs:'',
                     status: false,
                 }),
             }
@@ -75,6 +79,9 @@
             },
             setHeadOfDeptValue(selectedOption){
                 this.form.head_of_department = selectedOption.id
+            },
+            setbranchvalue(selectedOption){
+                this.form.branchs= selectedOption.id
             },
             store () {
                 this.$Progress.start();
@@ -115,4 +122,28 @@
             }
         }
     }
+        $('#branchs').change(function (e) {
+            let id = $('#branchs').val();
+            getDesignation(id);
+        });
+
+        function getDesignation(id) {
+            axios.get('/departments/'+id+'/get-designation')
+                .then(function (response) {
+                    if (!response.data.length <= 0) {
+                        for (let i = 0; i < response.data.length; i++) {
+                            let obj = response.data[i];
+                            let option = new Option(obj.name, obj.id, true);
+                            $('#designation').append(option).trigger('change');
+                        }
+                        toastr.success('Designation Successfully Loaded.','Success');
+                    }else {
+                        toastr.warning('No Designation Found for This Department','Not Found');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
 </script>
