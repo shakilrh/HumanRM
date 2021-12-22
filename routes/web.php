@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth','authorize']], function () {
     
     Route::resource('departments', 'DepartmentController')->except(['show']);
     Route::get('departments/{id}/get-designation', 'DepartmentController@getDesignation')->name('departments.get-designation');
+    Route::get('branchs/{id}/get-department', 'BranchController@getDepartment')->name('branchs.get-department');
     Route::resource('designations', 'DesignationController')->except(['show']);
     Route::resource('employees', 'EmployeeController');
 

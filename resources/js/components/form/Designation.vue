@@ -99,7 +99,7 @@ export default {
       editMode: false,
       department_value: {
         id: "",
-        name: "",
+        name: ["ayaz"],
       },
       branchs_value: {
         id: "",

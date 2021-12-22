@@ -81,6 +81,7 @@
                 this.form.head_of_department = selectedOption.id
             },
             setbranchvalue(selectedOption){
+                alert(selectedOption)
                 this.form.branchs= selectedOption.id
             },
             store () {
@@ -122,28 +123,6 @@
             }
         }
     }
-        $('#branchs').change(function (e) {
-            let id = $('#branchs').val();
-            getDesignation(id);
-        });
-
-        function getDesignation(id) {
-            axios.get('/departments/'+id+'/get-designation')
-                .then(function (response) {
-                    if (!response.data.length <= 0) {
-                        for (let i = 0; i < response.data.length; i++) {
-                            let obj = response.data[i];
-                            let option = new Option(obj.name, obj.id, true);
-                            $('#designation').append(option).trigger('change');
-                        }
-                        toastr.success('Designation Successfully Loaded.','Success');
-                    }else {
-                        toastr.warning('No Designation Found for This Department','Not Found');
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+       
 
 </script>

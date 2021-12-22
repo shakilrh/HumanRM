@@ -33,7 +33,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary card-outline">
                         <!-- form start -->
-                        {{--<employee-form></employee-form>--}}
+                       
                         <form user="form" method="POST" action="{{ isset($employee) ? route('employees.update',$employee->id) : route('employees.store') }}" enctype="multipart/form-data" >
                             @csrf
                             @if (isset($employee))
@@ -396,13 +396,21 @@
                 placeholder: "Choose Department First",
                 allowClear: true,
             });
+            $("#branch").select2({
+                placeholder: "Choose branch",
+                allowClear: true
+            });
         });
         $('#department').on('select2:select', function (e) {
             let id = $('#department').find(':selected').val();
             $('#designation').empty().trigger("change");
             getDesignation(id);
         });
-
+        $('#branch').on('select2:select', function (e) {
+            let id = $('#branch').find(':selected').val();
+            $('#department').empty().trigger("change");
+             getDepartment(id);
+         });
         function getDesignation(id) {
             axios.get('/departments/'+id+'/get-designation')
                 .then(function (response) {
@@ -418,6 +426,26 @@
                     }
                 })
                 .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        function getDepartment(id) {
+            axios.get('/branchs/'+id+'/get-department')
+                .then(function (response) {
+                    if (!response.data.length <= 0) {
+                        $('#department').val("");
+                        for (let i = 0; i < response.data.length; i++) {
+                            let obj = response.data[i];
+                            let option = new Option(obj.name, obj.id, true);
+                            $('#department').append(option).trigger('change');
+                        }
+                        toastr.success('Department Successfully Loaded.','Success');
+                    }else {
+                        toastr.warning('No Department Found for This Branch','Not Found');
+                    }
+                })
+                .catch(function (error) {
+                    alert(error);
                     console.log(error);
                 });
         }
