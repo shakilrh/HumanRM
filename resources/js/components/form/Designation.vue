@@ -35,7 +35,8 @@
             track-by="id"
             name="department"
             :class="{ 'multiselect-is-invalid': form.errors.has('department') }"
-          ></multiselect>
+         ></multiselect>
+        
           <div class="multiselect-invalid">
             <has-error :form="form" field="department"></has-error>
           </div>
@@ -99,7 +100,7 @@ export default {
       editMode: false,
       department_value: {
         id: "",
-        name: ["ayaz"],
+        name: "",
       },
       branchs_value: {
         id: "",
@@ -123,6 +124,7 @@ export default {
         this.form.fill(this.$props.designation);
       }
       if (this.$props.currentDepartment != null) {
+       
         this.department_value.id = this.$props.currentDepartment.id;
         this.branchs_valus.id = this.$props.currentDepartment.id;
         this.form.department = this.$props.currentDepartment.id;
@@ -133,9 +135,10 @@ export default {
       this.form.department = selectedOption.id;
     },
     setbranchvalue(selectedOption) {
-      alert(selectedOption.id);
-      this.form.branchs = selectedOption.id;
+      alert(selectedOption.name);
+      this.form.branches = selectedOption.id;
     },
+
     store() {
       this.$Progress.start();
       this.form.busy = true;
@@ -176,20 +179,4 @@ export default {
     },
   },
 };
-
-
-    $('#branchsid').change(function (e) {
-  let id = $('#branchs').val();
-  alert("<select name='state'>");
-  getDesignation(id);
-});
-
-
-function getDesignation(id) {
-  $('#departmentid').val("ayaz");
-  
-}
-
-
-
 </script>

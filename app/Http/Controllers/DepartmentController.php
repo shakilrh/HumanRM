@@ -109,6 +109,7 @@ class DepartmentController extends Controller
         } else {
             $department->status = 0;
         }
+        error_log($request);
         $department->save();
         Toastr::success('Department Successfully Updated :)', 'Success');
         return response()->json([

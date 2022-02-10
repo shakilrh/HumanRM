@@ -1133,7 +1133,7 @@
   "resolved" "https://registry.npmjs.org/bootstrap-switch/-/bootstrap-switch-3.3.4.tgz"
   "version" "3.3.4"
 
-"bootstrap@^3.1.1", "bootstrap@^4.2.1", "bootstrap@^4.6.0", "bootstrap@>=4.5.2":
+"bootstrap@^3.1.1", "bootstrap@^4.6.0", "bootstrap@^4.6.1", "bootstrap@>=4.5.2":
   "integrity" "sha512-0dj+VgI9Ecom+rvvpNZ4MUZJz8dcX7WCX+eTID9+/8HgOkv3dsRzi8BGeZJCQU6flWQVYxwTQnEZFrmJSEO7og=="
   "resolved" "https://registry.npmjs.org/bootstrap/-/bootstrap-4.6.1.tgz"
   "version" "4.6.1"
@@ -7408,7 +7408,7 @@
   "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.16.9.tgz"
   "version" "10.16.9"
 
-"sweetalert2@^7.28.11":
+"sweetalert2@^7.33.1":
   "integrity" "sha512-69KYtyhtxejFG0HDb8aVhAwbpAWPSTZwaL5vxDHgojErD2KeFxTmRgmkbiLtMC8UdTFXRmvTPtZTF4459MUb7w=="
   "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-7.33.1.tgz"
   "version" "7.33.1"

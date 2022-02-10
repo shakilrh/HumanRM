@@ -398,7 +398,7 @@
             });
             $("#branch").select2({
                 placeholder: "Choose branch",
-                allowClear: true
+                allowClear: true,
             });
         });
         $('#department').on('select2:select', function (e) {
@@ -433,7 +433,6 @@
             axios.get('/branchs/'+id+'/get-department')
                 .then(function (response) {
                     if (!response.data.length <= 0) {
-                        $('#department').val("");
                         for (let i = 0; i < response.data.length; i++) {
                             let obj = response.data[i];
                             let option = new Option(obj.name, obj.id, true);

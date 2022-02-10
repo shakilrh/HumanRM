@@ -66,6 +66,16 @@
                         </a>
                     </li>
                 @endif
+                @if (Auth::user()->hasPermissionTo('batch.index'))
+                    <li class="nav-item">
+                        <a href="{{ route('batch.index') }}" class="nav-link {{ Request::is('batch*') ? 'active' : '' }}">
+                            <i class="fas fa-couch"></i>
+                            <p>
+                                Batch
+                            </p>
+                        </a>
+                    </li>
+                @endif
 
                 @if (Auth::user()->hasPermissionTo('employees.index'))
                     <li class="nav-item">

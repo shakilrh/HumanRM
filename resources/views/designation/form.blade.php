@@ -58,18 +58,4 @@
 @endsection
 
 @push('js')
-<script>
-    $('#branchsid').change(function (e) {
-  let id = $('#branchs').val();
-  alert("<select name='state'>");
-  getDesignation(id);
-});
-
-
-function getDesignation(id) {
-  $('#departmentid').append("ayaz");
-  
-}
-</script>
-
 @endpush

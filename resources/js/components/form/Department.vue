@@ -81,7 +81,7 @@
                 this.form.head_of_department = selectedOption.id
             },
             setbranchvalue(selectedOption){
-                alert(selectedOption)
+                alert(selectedOption.id)
                 this.form.branchs= selectedOption.id
             },
             store () {
@@ -92,8 +92,10 @@
                     .then(response => {
                         console.log(response)
                         if (this.form.successful) {
+                            
                             this.$Progress.finish()
                             location.href = response.data.redirect;
+                            
                         } else {
                             this.$Progress.fail()
                         }

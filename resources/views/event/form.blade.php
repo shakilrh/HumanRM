@@ -76,7 +76,7 @@
                                         <div class="form-group">
                                             <label for="end">End Date</label>
                                             <span class="required-field">*</span>
-                                            <input name="end" id="end" class="datepicker form-control {{ $errors->has('end') ? ' is-invalid' : '' }}" value="{{ $event->end ?? old('end') }}" placeholder="End Date" autocomplete="off" required>
+                                            <input type="Date" name="end" id="end" class="datepicker form-control {{ $errors->has('end') ? ' is-invalid' : '' }}" value="{{ $event->end ?? old('end') }}" placeholder="End Date" autocomplete="off" required>
                                             @if ($errors->has('end'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('end') }}</strong>
@@ -124,5 +124,7 @@
 @endsection
 
 @push('js')
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
 @endpush
