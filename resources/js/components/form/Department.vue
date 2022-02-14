@@ -10,7 +10,7 @@
                 </div>
                <div class="form-group">
                     <label class="typo__label">Branches</label>
-                    <multiselect v-model="form.branch" :options="branches" @select="setbranchvalue" id="branchs"  placeholder="Select Branch" label="name" track-by="id" name="branchs" :class="{ 'multiselect-is-invalid': form.errors.has('branchs') }"></multiselect>
+                    <multiselect v-model="form.branchs" :options="branches" @select="setbranchvalue" id="branchs"  placeholder="Select Branch" label="name" track-by="id" name="branchs" :class="{ 'multiselect-is-invalid': form.errors.has('branchs') }"></multiselect>
                     <div class="multiselect-invalid">
                         <has-error :form="form" field="Branches list"></has-error>
                     </div>
@@ -81,7 +81,6 @@
                 this.form.head_of_department = selectedOption.id
             },
             setbranchvalue(selectedOption){
-                alert(selectedOption.id)
                 this.form.branchs= selectedOption.id
             },
             store () {

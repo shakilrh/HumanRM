@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="name">Batch Code <span class="required-field">*</span></label>
-                    <input v-model="form.batch_code" type="text" name="name" id="name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="Enter Batch Code"  required autofocus>
+                    <input v-model="form.batch_code" type="text"  name="name" id="name" class="form-control" readonly :class="{ 'is-invalid': form.errors.has('name') }" placeholder="Enter Batch Code"  required autofocus>
                     <has-error :form="form" field="name"></has-error>
                 </div>
                <div class="form-row">
@@ -58,7 +58,7 @@
             return {
                 editMode: false,
                 form: new Form({
-                    batch_code: '',
+                    batch_code: "Batch-"+new Date().getDate()+"-"+new Date().toLocaleString('en-us', { month: 'short' })+"-"+new Date().getFullYear(),
                     start_date: '',
                     end_date: ''
                     

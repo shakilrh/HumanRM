@@ -144,6 +144,30 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
+                                    <div class="col">
+                                    <div class="form-group">
+                                            <label for="batch">Select Batch</label>
+                                            <span class="required-field">*</span>
+                                            <select id="batch" class="form-control select2 {{ $errors->has('batch') ? ' is-invalid' : '' }}" name="batch" data-placeholder="Choose Batch" >
+                                                <option></option>
+                                                @foreach($batches as $key=>$batch)
+                                                    <option
+                                                        @if(isset($employee))
+                                                        {{ $employee->batch->id == $batch->id ? 'selected' : '' }}
+                                                        @endif
+                                                        {{ old('batch') == $batch->id ? 'selected' : '' }}
+                                                        value="{{ $batch->id }}">{{ $batch->batch_code }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('batch'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('batch') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                        <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="branch">Select Branch</label>

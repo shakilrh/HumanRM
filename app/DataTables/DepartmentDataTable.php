@@ -22,12 +22,6 @@ class DepartmentDataTable extends DataTable
         return $dataTable
 
         // return datatables($query)
-            ->addColumn('head_of_department', function ($query) {
-                return isset($query->user->name) ? $query->user->name : 'Not Found';
-            })
-            ->addColumn('branch', function ($query) {
-                return isset($query->branch->name) ? $query->branch->name : 'Not Found';
-            })
             ->setRowClass('{{ $status == true ? "text-dark" : "text-danger" }}')
             ->editColumn('status', function ($query) {
                 return $query->status == true ? '<span class="badge badge-primary">Active</span>
@@ -89,8 +83,7 @@ class DepartmentDataTable extends DataTable
     {
         return [
             'name',
-            'head_of_department',
-            'branch',
+            'branch_id',
             'status',
             'modified',
         ];

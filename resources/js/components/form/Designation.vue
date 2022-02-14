@@ -9,7 +9,7 @@
         <div class="form-group">
           <label class="typo__label">Select Branch</label>
           <multiselect
-            v-model="branchs_value"
+            v-model="form.branchs"
             :options="branches"
             id="branchs"
             @select="setbranchvalue"

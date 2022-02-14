@@ -85,7 +85,8 @@ class DepartmentController extends Controller
     {
         $department = Department::with('user')->findOrFail($id);
         $users = User::role('employee')->select('id', 'name')->get();
-        return view('department.form', compact('users', 'department'));
+        $branches= Branch::active()->select('id', 'name')->get();
+        return view('department.form', compact('users', 'department','branches'));
     }
 
     /**

@@ -30,7 +30,6 @@ class DesignationController extends Controller
     {
         $data['departments'] = Department::select('id', 'name')->active()->get();
         $data['branches'] = Branch::active()->select('id', 'name')->get();
-        
         return view('designation.form', $data);
     }
 
@@ -49,6 +48,7 @@ class DesignationController extends Controller
         $designation = new Designation();
         $designation->department_id = $request->department;
         $designation->name = $request->name;
+        $designation->branch_id = $request->branch_id;
         $designation->slug = str_slug($request->name);
         if ($request->status == true) {
             $designation->status = 1;
@@ -83,7 +83,8 @@ class DesignationController extends Controller
     public function edit(Designation $designation)
     {
         $departments = Department::select('id', 'name')->active()->get();
-        return view('designation.form', compact('designation', 'departments'));
+        $branches= Branch::active()->select('id', 'name')->get();
+        return view('designation.form', compact('designation', 'departments','branches'));
     }
 
     /**
@@ -101,6 +102,7 @@ class DesignationController extends Controller
         ]);
         $designation->department_id = $request->department;
         $designation->name = $request->name;
+        $designation->branch_id = $request->branch_id;
         $designation->slug = str_slug($request->name);
         if ($request->status == true) {
             $designation->status = 1;

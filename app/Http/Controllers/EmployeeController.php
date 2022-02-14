@@ -8,6 +8,7 @@ use App\Employee;
 use Carbon\Carbon;
 use App\Department;
 use App\Designation;
+use App\Batch;
 use App\Enums\SalaryType;
 use App\Enums\UserStatus;
 use App\Traits\FileHandler;
@@ -41,6 +42,7 @@ class EmployeeController extends Controller
         $data['salaryTypes'] = SalaryType::getValues();
         $data['branches'] = Branch::active()->select('id', 'name')->get();
         $data['departments'] = Department::select('id', 'name')->get();
+        $data['batches'] = Batch::select('id', 'batch_code')->get();
         return view('employee.create', $data);
     }
 
@@ -60,6 +62,7 @@ class EmployeeController extends Controller
             'username' => 'required|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'branch' => 'required',
+            'batch' => 'required',
             'department' => 'required',
             'designation' => 'required',
             'basic_salary' => 'required',
@@ -88,6 +91,8 @@ class EmployeeController extends Controller
         $employee->branch_id = $request->branch;
         $employee->department_id = $request->department;
         $employee->designation_id = $request->designation;
+        $employee->batch_id = $request->batch;
+        $employee->batch_id = $request->batch;
         $employee->employee_code =$request->employee_code;
         $employee->phone = $request->phone;
         $employee->alt_phone = $request->alt_phone;
@@ -125,6 +130,7 @@ class EmployeeController extends Controller
         $data['employee'] = $employee;
         $data['branches'] = Branch::active()->select('id', 'name')->get();
         $data['employeeGenders'] = EmployeeGender::getValues();
+        $data['batches'] = Batch::select('id', 'batch_code')->get();
         $data['departments'] = Department::select('id', 'name')->get();
         $data['designations'] = Department::findOrFail($employee->department->id)->designations;
         $data['salaryTypes'] = SalaryType::getValues();
@@ -151,6 +157,7 @@ class EmployeeController extends Controller
             'username' => 'required|unique:users,username,' .$employee->user->id,
             'password' => 'nullable|string|min:6|confirmed',
             'branch' => 'required',
+            'batch' => 'required',
             'gender' => 'required',
             'department' => 'required',
             'designation' => 'required',
@@ -174,6 +181,7 @@ class EmployeeController extends Controller
         //        Store employee data
         $employee->branch_id = $request->branch;
         $employee->department_id = $request->department;
+        $employee->batch_id = $request->batch;
         $employee->designation_id = $request->designation;
         $employee->employee_code = $request->employee_code;
         $employee->phone = $request->phone;

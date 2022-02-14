@@ -16,6 +16,10 @@ class Employee extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
+    }
 
     public function department()
     {
