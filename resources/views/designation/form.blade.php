@@ -42,11 +42,6 @@
                             :action="{{ isset($designation) ? json_encode(route('designations.update',$designation->id)) : json_encode(route('designations.store')) }}"
                             :back-url="{{ json_encode(route('designations.index')) }}">
                         </designation-form>
-
-               
-
-</form>
-                        
                     </div>
                     <!-- /.card -->
                 </div>

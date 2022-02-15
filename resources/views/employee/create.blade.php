@@ -33,7 +33,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary card-outline">
                         <!-- form start -->
-                       
+                        {{--<employee-form></employee-form>--}}
                         <form user="form" method="POST" action="{{ isset($employee) ? route('employees.update',$employee->id) : route('employees.store') }}" enctype="multipart/form-data" >
                             @csrf
                             @if (isset($employee))
@@ -166,7 +166,7 @@
                                                 <option></option>
                                                 @foreach($branches as $key=>$branch)
                                                     <option
-                                                       @if(isset($emplbranchoyee))
+                                                        @if(isset($emplbranchoyee))
                                                         {{ $employee->branch->id == $branch->id ? 'selected' : '' }}
                                                         @endif
                                                         {{ old('branch') == $branch->id ? 'selected' : '' }}

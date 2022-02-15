@@ -30,7 +30,6 @@ Route::group(['middleware' => ['auth','authorize']], function () {
     Route::get('/notifications/destroy', 'NotificationController@destroy')->name('notifications.destroy');
 
     Route::resource('branches', 'BranchController')->except(['show']);
-
     Route::resource('batch', 'BatchController')->except(['show']);
     
     Route::resource('departments', 'DepartmentController')->except(['show']);

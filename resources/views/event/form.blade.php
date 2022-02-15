@@ -76,7 +76,7 @@
                                         <div class="form-group">
                                             <label for="end">End Date</label>
                                             <span class="required-field">*</span>
-                                            <input type="Date" name="end" id="end" class="datepicker form-control {{ $errors->has('end') ? ' is-invalid' : '' }}" value="{{ $event->end ?? old('end') }}" placeholder="End Date" autocomplete="off" required>
+                                            <input name="end" id="end" class="datepicker form-control {{ $errors->has('end') ? ' is-invalid' : '' }}" value="{{ $event->end ?? old('end') }}" placeholder="End Date" autocomplete="off" required>
                                             @if ($errors->has('end'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('end') }}</strong>
