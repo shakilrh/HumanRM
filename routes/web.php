@@ -30,8 +30,11 @@ Route::group(['middleware' => ['auth','authorize']], function () {
     Route::get('/notifications/destroy', 'NotificationController@destroy')->name('notifications.destroy');
 
     Route::resource('branches', 'BranchController')->except(['show']);
+    Route::resource('batch', 'BatchController')->except(['show']);
+    
     Route::resource('departments', 'DepartmentController')->except(['show']);
     Route::get('departments/{id}/get-designation', 'DepartmentController@getDesignation')->name('departments.get-designation');
+    Route::get('branchs/{id}/get-department', 'BranchController@getDepartment')->name('branchs.get-department');
     Route::resource('designations', 'DesignationController')->except(['show']);
     Route::resource('employees', 'EmployeeController');
 

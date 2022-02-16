@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Department;
+use App\Branch;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\DataTables\DepartmentDataTable;
@@ -27,8 +28,10 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $users = User::role('employee')->select('id', 'name')->get();
-        return view('department.form', compact('users'));
+        $data['users'] = User::role('employee')->select('id', 'name')->get();
+        $data['branches'] = Branch::active()->select('id', 'name')->get();
+        // $users = User::role('employee')->select('id', 'name')->get();
+        return view('department.form', $data);
     }
 
     /**
@@ -47,6 +50,7 @@ class DepartmentController extends Controller
         $department->user_id = $request->head_of_department;
         $department->name = $request->name;
         $department->slug = str_slug($request->name);
+        $department->branch_id=$request->branch_id;
         if ($request->status == true) {
             $department->status = 1;
         } else {
@@ -81,7 +85,8 @@ class DepartmentController extends Controller
     {
         $department = Department::with('user')->findOrFail($id);
         $users = User::role('employee')->select('id', 'name')->get();
-        return view('department.form', compact('users', 'department'));
+        $branches= Branch::active()->select('id', 'name')->get();
+        return view('department.form', compact('users', 'department','branches'));
     }
 
     /**
@@ -105,6 +110,7 @@ class DepartmentController extends Controller
         } else {
             $department->status = 0;
         }
+        error_log($request);
         $department->save();
         Toastr::success('Department Successfully Updated :)', 'Success');
         return response()->json([

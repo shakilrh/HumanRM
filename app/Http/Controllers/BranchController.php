@@ -19,6 +19,10 @@ class BranchController extends Controller
     {
         return $dataTable->render('branch.index');
     }
+    public function getDepartment($id)
+    {
+        return Branch::findOrfail($id)->departments;
+    }
 
     /**
      * Show the form for creating a new resource.

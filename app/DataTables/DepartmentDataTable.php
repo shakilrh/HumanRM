@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\User;
 use App\Department;
+use App\Branch;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -21,9 +22,6 @@ class DepartmentDataTable extends DataTable
         return $dataTable
 
         // return datatables($query)
-            ->addColumn('head_of_department', function ($query) {
-                return isset($query->user->name) ? $query->user->name : 'Not Found';
-            })
             ->setRowClass('{{ $status == true ? "text-dark" : "text-danger" }}')
             ->editColumn('status', function ($query) {
                 return $query->status == true ? '<span class="badge badge-primary">Active</span>
@@ -44,7 +42,7 @@ class DepartmentDataTable extends DataTable
      */
     public function query(Department $model)
     {
-        return $model->newQuery()->select('id', 'user_id', 'name', 'status', 'updated_at')
+        return $model->newQuery()->select('id', 'user_id', 'name', 'status', 'updated_at','branch_id')
             ->orderByDesc('id');
     }
 
@@ -85,7 +83,7 @@ class DepartmentDataTable extends DataTable
     {
         return [
             'name',
-            'head_of_department',
+            'branch_id',
             'status',
             'modified',
         ];

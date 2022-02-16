@@ -19,4 +19,8 @@ class Designation extends Model
     {
         return $this->hasMany(Employee::class);
     }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 }

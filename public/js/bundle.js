@@ -1,1 +1,25 @@
-function deleteData(e){var t=swal.mixin({confirmButtonClass:"btn btn-success",cancelButtonClass:"btn btn-danger",buttonsStyling:!1});t({title:"Are you sure?",text:"You won't be able to revert this!",type:"warning",showCancelButton:!0,confirmButtonText:"Yes, delete it!",cancelButtonText:"No, cancel!",reverseButtons:!0}).then(function(n){n.value?(document.getElementById("delete-form-"+e).submit(),t("Deleted!","Your file has been deleted.","success")):n.dismiss===swal.DismissReason.cancel&&t("Cancelled","Your data is safe :)","info")})}
+function deleteData(id) {
+    var swalWithBootstrapButtons = swal.mixin({
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false
+    });
+    swalWithBootstrapButtons({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    }).then(function (result) {
+        if (result.value) {
+            document.getElementById('delete-form-' + id).submit();
+            swalWithBootstrapButtons('Deleted!', 'Your file has been deleted.', 'success');
+        } else if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel) {
+            swalWithBootstrapButtons('Cancelled', 'Your data is safe :)', 'info');
+        }
+    });
+}

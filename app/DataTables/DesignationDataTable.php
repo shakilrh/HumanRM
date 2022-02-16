@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Designation;
+use App\Branch;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -20,6 +21,9 @@ class DesignationDataTable extends DataTable
         return $dataTable
             ->addColumn('department', function ($query) {
                 return isset($query->department->name) ? $query->department->name : 'Not Found';
+            })
+            ->addColumn('branch', function ($query) {
+                return isset($query->branch->name) ? $query->branch->name : 'Not Found';
             })
             ->setRowClass('{{ $status == true ? "text-dark" : "text-danger" }}')
             ->editColumn('status', function ($query) {
@@ -41,7 +45,7 @@ class DesignationDataTable extends DataTable
      */
     public function query(Designation $model)
     {
-        return $model->newQuery()->select('id', 'department_id', 'name', 'status', 'updated_at')
+        return $model->newQuery()->select('id', 'department_id', 'name', 'status', 'updated_at','branch_id')
             ->orderByDesc('id');
     }
 
@@ -83,6 +87,7 @@ class DesignationDataTable extends DataTable
         return [
             'department',
             'name',
+            'branch',
             'status',
             'modified'
         ];

@@ -35,6 +35,9 @@ class EmployeeDataTable extends DataTable
             ->addColumn('branch', function ($query) {
                 return isset($query->branch->name) ? $query->branch->name : 'Not Found';
             })
+            ->addColumn('batch_code', function ($query) {
+                return isset($query->batch->batch_code) ? $query->batch->batch_code : 'Not Found';
+            })
             ->addColumn('department', function ($query) {
                 return isset($query->department->name) ? $query->department->name : 'Not Found';
             })
@@ -77,7 +80,8 @@ class EmployeeDataTable extends DataTable
             'designation_id',
             'employee_code',
             'basic_salary',
-            'updated_at'
+            'updated_at',
+            'batch_id'
         )
             ->orderByDesc('id')->with('user');
     }
@@ -115,7 +119,8 @@ class EmployeeDataTable extends DataTable
             'designation',
             'basic_salary',
             'status',
-            'modified'
+            'modified',
+            'batch_id'
         ];
     }
 

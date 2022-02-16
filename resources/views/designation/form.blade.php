@@ -36,6 +36,7 @@
                         <!-- form start -->
                         <designation-form
                             :departments="{{ json_encode($departments->toArray()) }}"
+                            :branches="{{ json_encode($branches) }}"
                             :current-department="{{ isset($designation->department) ? json_encode($designation->department) : json_encode(null) }}"
                             :designation="{{ isset($designation) ? json_encode($designation->toArray()) : json_encode(null)}}"
                             :action="{{ isset($designation) ? json_encode(route('designations.update',$designation->id)) : json_encode(route('designations.store')) }}"
@@ -52,5 +53,4 @@
 @endsection
 
 @push('js')
-
 @endpush

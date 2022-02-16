@@ -135,6 +135,30 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
+                                    <div class="form-group">
+                                            <label for="batch">Select Batch</label>
+                                            <span class="required-field">*</span>{{$batches}}
+                                            <select id="batch" class="form-control select2 {{ $errors->has('batch') ? ' is-invalid' : '' }}" name="batch" data-placeholder="Choose Batch" >
+                                                <option></option>
+                                                @foreach($batches as $key=>$batch)
+                                                    <option
+                                                        @if(isset($employee))
+                                                        {{ $employee->batch->id == $batch->id ? 'selected' : '' }}
+                                                        @endif
+                                                        {{ old('batch') == $batch->id ? 'selected' : '' }}
+                                                        value="{{ $batch->id }}">{{ $batch->batch_code }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('batch'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('batch') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
                                         <div class="form-group">
                                             <label for="branch">Select Branch</label>
                                             <span class="required-field">*</span>
@@ -174,7 +198,7 @@
                                         <div class="form-group">
                                             <label for="department">Select Department</label>
                                             <span class="required-field">*</span>
-                                            <select id="department" class="form-control {{ $errors->has('department') ? ' is-invalid' : '' }}" name="department" data-placeholder="Choose Department">
+                                            <select id="department" class="form-control select2 {{ $errors->has('department') ? ' is-invalid' : '' }}" name="department" data-placeholder="Choose Department">
                                                 <option></option>
                                                 @foreach($departments as $key=>$department)
                                                     <option
@@ -196,7 +220,7 @@
                                         <div class="form-group">
                                             <label for="designation">Select Designation</label>
                                             <span class="required-field">*</span>
-                                            <select id="designation" class="form-control {{ $errors->has('designation') ? ' is-invalid' : '' }}" name="designation" data-placeholder="Designation" data-readonly="Choose Department First">
+                                            <select id="designation" class="form-control select2 {{ $errors->has('designation') ? ' is-invalid' : '' }}" name="designation" data-placeholder="Designation" data-readonly="Choose Department First">
                                                 <option></option>
                                                 {{-- @foreach($departments as $key=>$department)
                                                      <option
@@ -396,13 +420,25 @@
                 placeholder: "Choose Department First",
                 allowClear: true,
             });
+            $("#branch").select2({
+                placeholder: "Choose branch",
+                allowClear: true,
+            });
+            $("#batch").select2({
+                placeholder: "Choose branch",
+                allowClear: true,
+            });
         });
         $('#department').on('select2:select', function (e) {
             let id = $('#department').find(':selected').val();
             $('#designation').empty().trigger("change");
             getDesignation(id);
         });
-
+        $('#branch').on('select2:select', function (e) {
+            let id = $('#branch').find(':selected').val();
+            $('#department').empty().trigger("change");
+             getDepartment(id);
+         });
         function getDesignation(id) {
             axios.get('/departments/'+id+'/get-designation')
                 .then(function (response) {
@@ -421,5 +457,26 @@
                     console.log(error);
                 });
         }
+        function getDepartment(id) {
+            axios.get('/branchs/'+id+'/get-department')
+                .then(function (response) {
+                    if (!response.data.length <= 0) {
+                        for (let i = 0; i < response.data.length; i++) {
+                            let obj = response.data[i];
+                            let option = new Option(obj.name, obj.id, true);
+                            $('#department').append(option).trigger('change');
+                        }
+                        toastr.success('Department Successfully Loaded.','Success');
+                    }else {
+                        toastr.warning('No Department Found for This Branch','Not Found');
+                    }
+                })
+                .catch(function (error) {
+                    alert(error);
+                    console.log(error);
+                });
+        }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+    
 @endpush
